@@ -1,0 +1,11 @@
+{
+  "name": "regbridge",
+  "version": "1.0.0",
+  "description": "RegBridge — Kripto Varlık Regülasyon Köprüsü (PoC)",
+  "scripts": {
+    "demo": "node demo.js",
+    "test": "node core/test.js",
+    "api": "node api/server.js"
+  },
+  "license": "MIT"
+}
