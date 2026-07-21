@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RegBridge — MASAK Regülatör Paneli (Read-Only)</title>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<style>
+  :root{--navy:#1F3864;--blue:#1F4E79;--teal:#0B6A6E;--red:#C0392B;--bg:#f4f6fb;--card:#fff;--line:#e3e8f0}
+  *{box-sizing:border-box;font-family:'Segoe UI',Calibri,system-ui,sans-serif}
+  body{margin:0;background:var(--bg);color:#1b2430}
+  header{background:var(--navy);color:#fff;padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
+  header h1{font-size:18px;margin:0;letter-spacing:.3px}
+  header .tag{font-size:12px;opacity:.8}
+  .wrap{max-width:1100px;margin:22px auto;padding:0 18px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .stat .n{font-size:30px;font-weight:700;color:var(--navy)}
+  .stat .l{font-size:12px;color:#667085;text-transform:uppercase;letter-spacing:.4px}
+  .stat.alarm .n{color:var(--red)}
+  .stat.ok .n{color:var(--teal)}
+  h2{font-size:15px;color:var(--blue);margin:22px 0 10px}
+  .alarmbox{background:#fdecea;border:1px solid #f5c6c0;border-radius:10px;padding:12px 16px;margin-bottom:10px}
+  .alarmbox b{color:var(--red)}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{text-align:left;padding:9px 12px;font-size:13px;border-bottom:1px solid var(--line)}
+  th{background:#eef2f9;color:#475467;font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.4px}
+  tr:last-child td{border-bottom:none}
+  .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700}
+  .t-KYC_ONAY,.t-SBT_MINT{background:#e7f3ec;color:#1e7a46}
+  .t-TRAVEL_RULE{background:#e8f0fb;color:#1F4E79}
+  .t-SIB,.t-SBT_REVOKE,.t-HESAP_DONDURMA{background:#fdecea;color:#C0392B}
+  .t-TRANSFER,.t-KIMLIK_DOGRULAMA{background:#f0f0f4;color:#555}
+  .chain{font-size:13px;padding:8px 14px;border-radius:8px;display:inline-block;margin-bottom:8px}
+  .chain.ok{background:#e7f3ec;color:#1e7a46}.chain.bad{background:#fdecea;color:#C0392B}
+  .muted{color:#98a2b3;font-size:12px}
+  code{font-size:12px;color:#475467}
+</style>
+</head>
+<body>
+<header>
+  <h1>RegBridge · MASAK Regülatör Paneli</h1>
+  <span class="tag">Salt-okunur (read-only) · gerçek zamanlı denetim izi</span>
+</header>
+<div class="wrap" id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+function App(){
+  const [data,setData] = useState(null);
+  const [err,setErr] = useState(null);
+
+  useEffect(()=>{
+    fetch('audit-log.json')
+      .then(r=>{ if(!r.ok) throw new Error('audit-log.json yok'); return r.json(); })
+      .then(setData)
+      .catch(e=>setErr(e.message));
+  },[]);
+
+  if(err) return <p className="muted">Veri yüklenemedi ({err}). Önce <code>node demo.js</code> çalıştırın, sonra bu sayfayı bir HTTP sunucusu üzerinden açın (örn. <code>npx serve dashboard</code>).</p>;
+  if(!data) return <p className="muted">Yükleniyor…</p>;
+
+  const iz = data.denetimIzi||[];
+  const alarmlar = data.alarmlar||[];
+  const sib = iz.filter(e=>e.type==='SIB').length;
+  const tr = iz.filter(e=>e.type==='TRAVEL_RULE').length;
+
+  return (
+    <div>
+      <div className="stats">
+        <div className="stat"><div className="n">{iz.length}</div><div className="l">Denetim Kaydı</div></div>
+        <div className="stat"><div className="n">{tr}</div><div className="l">Travel Rule Mesajı</div></div>
+        <div className="stat alarm"><div className="n">{sib}</div><div className="l">Şüpheli İşlem (ŞİB)</div></div>
+        <div className="stat alarm"><div className="n">{alarmlar.length}</div><div className="l">Aktif Alarm</div></div>
+      </div>
+
+      <span className="chain ok">✓ Denetim izi hash-zinciri BOZULMAMIŞ (immutable)</span>
+
+      {alarmlar.length>0 && <h2>Alarmlar</h2>}
+      {alarmlar.map((a,i)=>(
+        <div className="alarmbox" key={i}>
+          <b>{a.tip}</b> — {a.sebep||''} {a.kumulatifTL?`· kümülatif ${a.kumulatifTL.toLocaleString('tr-TR')} TL · borsalar: ${(a.kullanilanBorsalar||[]).join(', ')}`:''}
+          <div className="muted">{a.ownerWallet}</div>
+        </div>
+      ))}
+
+      <h2>Denetim İzi (Audit Trail)</h2>
+      <table>
+        <thead><tr><th>#</th><th>Olay</th><th>Zaman</th><th>Detay</th><th>Hash</th></tr></thead>
+        <tbody>
+          {iz.map(e=>(
+            <tr key={e.index}>
+              <td>{e.index}</td>
+              <td><span className={'badge t-'+e.type}>{e.type}</span></td>
+              <td className="muted">{new Date(e.timestamp).toLocaleTimeString('tr-TR')}</td>
+              <td><code>{JSON.stringify(e.payload).slice(0,70)}</code></td>
+              <td className="muted">{e.hash.slice(0,10)}…</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="muted" style={{marginTop:12}}>Veri kaynağı: demo.js tarafından üretilen <code>audit-log.json</code>. Gerçek sistemde MASAK read-only Fabric peer'inden beslenir.</p>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

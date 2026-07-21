@@ -1,0 +1,16 @@
+{
+  "name": "regbridge-zkp",
+  "version": "1.0.0",
+  "description": "RegBridge ZK-KYC devresi (Circom) ve SnarkJS akışı",
+  "scripts": {
+    "demo": "node scripts/prove.js",
+    "build:snark": "bash scripts/build.sh"
+  },
+  "dependencies": {
+    "circomlibjs": "^0.1.7",
+    "wasmcurves": "^0.2.2"
+  },
+  "devDependencies": {
+    "snarkjs": "^0.7.4"
+  }
+}

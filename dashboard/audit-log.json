@@ -1,0 +1,198 @@
+{
+  "denetimIzi": [
+    {
+      "index": 0,
+      "type": "SBT_MINT",
+      "timestamp": "2026-06-24T20:42:15.475Z",
+      "actorHash": "9590cfeb360d01a2",
+      "payload": {
+        "tokenId": "0x700531884794506a43dbcb9cf335a49454a5458b",
+        "issuer": "BORSA_A",
+        "commitment": "378031d629d8cf1791a8c7bdcf1e18b3a261dd09484ebf053011a50722af0a50"
+      },
+      "prevHash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "hash": "c32c612869d4864d8ed5efe9c3b83d79e8c1d53a991dde66598ea0373471a80f"
+    },
+    {
+      "index": 1,
+      "type": "KYC_ONAY",
+      "timestamp": "2026-06-24T20:42:15.475Z",
+      "actorHash": "9590cfeb360d01a2",
+      "payload": {
+        "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+        "borsaId": "BORSA_A",
+        "over18": true
+      },
+      "prevHash": "c32c612869d4864d8ed5efe9c3b83d79e8c1d53a991dde66598ea0373471a80f",
+      "hash": "0ae07803bc0d77ba3002ca755a06ee84ac987c8a5dc03912b34f314309f81c43"
+    },
+    {
+      "index": 2,
+      "type": "KIMLIK_DOGRULAMA",
+      "timestamp": "2026-06-24T20:42:15.475Z",
+      "actorHash": "0dc8cd0a92280156",
+      "payload": {
+        "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+        "sonuc": true,
+        "sebep": "gecerli"
+      },
+      "prevHash": "0ae07803bc0d77ba3002ca755a06ee84ac987c8a5dc03912b34f314309f81c43",
+      "hash": "d7f2744edcac2c02c238bbc70a0245b92d934d7475a667d81fdb8dee1dc0151d"
+    },
+    {
+      "index": 3,
+      "type": "TRANSFER",
+      "timestamp": "2026-06-24T20:42:15.475Z",
+      "actorHash": "0dc8cd0a92280156",
+      "payload": {
+        "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+        "gonderenBorsa": "BORSA_A",
+        "alanBorsa": "BORSA_B",
+        "tutarTL": 50000,
+        "varlik": "USDT"
+      },
+      "prevHash": "d7f2744edcac2c02c238bbc70a0245b92d934d7475a667d81fdb8dee1dc0151d",
+      "hash": "20a7cfd8bf5ae07835f9865696d1fa08348af440786e51cf9e08cc0ed82fe1d4"
+    },
+    {
+      "index": 4,
+      "type": "TRAVEL_RULE",
+      "timestamp": "2026-06-24T20:42:15.475Z",
+      "actorHash": "9590cfeb360d01a2",
+      "payload": {
+        "messageId": "0xf6233e922e981b1b730d57c7",
+        "gonderenBorsa": "BORSA_A",
+        "alanBorsa": "BORSA_B",
+        "tutarTL": 50000
+      },
+      "prevHash": "20a7cfd8bf5ae07835f9865696d1fa08348af440786e51cf9e08cc0ed82fe1d4",
+      "hash": "427bd2ea4f0bba783b849c7874a74c55919c7924b0b97df309fa567eca2426ef"
+    },
+    {
+      "index": 5,
+      "type": "TRANSFER",
+      "timestamp": "2026-06-24T20:42:15.476Z",
+      "actorHash": "0dc8cd0a92280156",
+      "payload": {
+        "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+        "gonderenBorsa": "BORSA_A",
+        "alanBorsa": "DIS",
+        "tutarTL": 6000,
+        "varlik": "USDT"
+      },
+      "prevHash": "427bd2ea4f0bba783b849c7874a74c55919c7924b0b97df309fa567eca2426ef",
+      "hash": "d897d8e76d1b90c294c35db237dc7628154b935ef7950db2e4c6bdef624450a9"
+    },
+    {
+      "index": 6,
+      "type": "TRANSFER",
+      "timestamp": "2026-06-24T20:42:15.488Z",
+      "actorHash": "0dc8cd0a92280156",
+      "payload": {
+        "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+        "gonderenBorsa": "BORSA_B",
+        "alanBorsa": "DIS",
+        "tutarTL": 7000,
+        "varlik": "USDT"
+      },
+      "prevHash": "d897d8e76d1b90c294c35db237dc7628154b935ef7950db2e4c6bdef624450a9",
+      "hash": "002cfd721cfe8ed575056259314f05536de5d33691ddc35dd9a7ec799d1b81d9"
+    },
+    {
+      "index": 7,
+      "type": "SIB",
+      "timestamp": "2026-06-24T20:42:15.488Z",
+      "actorHash": "c9b697dbb54afaa9",
+      "payload": {
+        "tip": "SIB",
+        "sebep": "Cross-exchange smurfing şüphesi: eşik altı işlemlerin kümülatif toplamı eşiği aştı",
+        "commitment": "378031d629d8cf1791a8c7bdcf1e18b3a261dd09484ebf053011a50722af0a50",
+        "kumulatifTL": 63000,
+        "islemSayisi": 3,
+        "kullanilanBorsalar": [
+          "BORSA_A",
+          "BORSA_B"
+        ],
+        "olusturulma": "2026-06-24T20:42:15.488Z",
+        "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE"
+      },
+      "prevHash": "002cfd721cfe8ed575056259314f05536de5d33691ddc35dd9a7ec799d1b81d9",
+      "hash": "527779ed247a98c5e0fca8abdf76419d95b6f6ae91b76a068575e23450f52769"
+    },
+    {
+      "index": 8,
+      "type": "TRANSFER",
+      "timestamp": "2026-06-24T20:42:15.488Z",
+      "actorHash": "0dc8cd0a92280156",
+      "payload": {
+        "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+        "gonderenBorsa": "BORSA_C",
+        "alanBorsa": "DIS",
+        "tutarTL": 8000,
+        "varlik": "USDT"
+      },
+      "prevHash": "527779ed247a98c5e0fca8abdf76419d95b6f6ae91b76a068575e23450f52769",
+      "hash": "d4603fa02dbcf3009b4e54975c1f8dede39232651293dc5e4dc597415a4275cb"
+    },
+    {
+      "index": 9,
+      "type": "SBT_REVOKE",
+      "timestamp": "2026-06-24T20:42:15.488Z",
+      "actorHash": "f76e1d660b3b4de5",
+      "payload": {
+        "tokenId": "0x700531884794506a43dbcb9cf335a49454a5458b",
+        "reason": "Smurfing şüphesi — MASAK kararı"
+      },
+      "prevHash": "d4603fa02dbcf3009b4e54975c1f8dede39232651293dc5e4dc597415a4275cb",
+      "hash": "a0331f7535f149bf4af4098757cd712905b39894d51532276d89b4c39d38a744"
+    },
+    {
+      "index": 10,
+      "type": "HESAP_DONDURMA",
+      "timestamp": "2026-06-24T20:42:15.488Z",
+      "actorHash": "f76e1d660b3b4de5",
+      "payload": {
+        "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+        "sebep": "Smurfing şüphesi — MASAK kararı",
+        "etki": "tum_borsalar"
+      },
+      "prevHash": "a0331f7535f149bf4af4098757cd712905b39894d51532276d89b4c39d38a744",
+      "hash": "7ea6b3c23e59de6e007012fe9b3fdc17bbe632c1c0776085972bb6da292d233c"
+    },
+    {
+      "index": 11,
+      "type": "KIMLIK_DOGRULAMA",
+      "timestamp": "2026-06-24T20:42:15.488Z",
+      "actorHash": "0dc8cd0a92280156",
+      "payload": {
+        "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+        "sonuc": false,
+        "sebep": "SBT kara listede / iptal"
+      },
+      "prevHash": "7ea6b3c23e59de6e007012fe9b3fdc17bbe632c1c0776085972bb6da292d233c",
+      "hash": "f15df795f1e4b4e7cb86cf730f869c032008cf165e6f0eafcfabec4ea846eecb"
+    }
+  ],
+  "alarmlar": [
+    {
+      "tip": "SIB",
+      "sebep": "Cross-exchange smurfing şüphesi: eşik altı işlemlerin kümülatif toplamı eşiği aştı",
+      "commitment": "378031d629d8cf1791a8c7bdcf1e18b3a261dd09484ebf053011a50722af0a50",
+      "kumulatifTL": 63000,
+      "islemSayisi": 3,
+      "kullanilanBorsalar": [
+        "BORSA_A",
+        "BORSA_B"
+      ],
+      "olusturulma": "2026-06-24T20:42:15.488Z",
+      "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+      "auditIndex": 7
+    },
+    {
+      "tip": "DONDURMA",
+      "ownerWallet": "0xA11CE0000000000000000000000000000000A11CE",
+      "sebep": "Smurfing şüphesi — MASAK kararı",
+      "olusturulma": "2026-06-24T20:42:15.488Z"
+    }
+  ]
+}
